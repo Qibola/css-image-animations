@@ -1,0 +1,102 @@
+/* ---------------------------------------------------------------
+   css-image-animations
+   Day 1: scaffold — page shell, gallery grid, card + SVG artwork.
+   Animations get added one per day below the "Animations" heading.
+   --------------------------------------------------------------- */
+
+:root {
+  --bg: #14161c;
+  --card: #1e222b;
+  --text: #eef1f6;
+  --muted: #a3acbd;
+  --accent: #ffd66b;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2.5rem 1.25rem 3rem;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- header / footer ---------- */
+
+.page-header {
+  max-width: 60rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.subtitle code {
+  color: var(--accent);
+  font-size: 0.95em;
+}
+
+.page-footer {
+  margin: 2.5rem auto 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- gallery grid ---------- */
+
+.gallery {
+  max-width: 60rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  margin: 0;
+  padding: 0;
+  background: var(--card);
+  border: 1px solid #2b303c;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* The "image": an inline SVG data URI, so the repo stays text-only. */
+.art {
+  aspect-ratio: 16 / 10;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 200'%3E%3Cdefs%3E%3ClinearGradient id='sky' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%232b5876'/%3E%3Cstop offset='1' stop-color='%23f6b17a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='200' fill='url(%23sky)'/%3E%3Ccircle cx='160' cy='120' r='34' fill='%23ffd66b'/%3E%3Cpath d='M0 200 Q80 120 160 156 T320 138 L320 200 Z' fill='%233f7d58'/%3E%3Cpath d='M0 200 Q100 152 200 178 T320 168 L320 200 Z' fill='%232c5a41'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}
+
+.card figcaption {
+  padding: 0.9rem 1.1rem 1.15rem;
+}
+
+.card figcaption h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.card figcaption p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------------
+   Animations
+   (Day 2 onwards: one @keyframes block + one modifier class each.)
+   --------------------------------------------------------------- */
