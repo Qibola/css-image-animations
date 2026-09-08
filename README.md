@@ -26,7 +26,7 @@ open index.html
 ## Roadmap
 
 - [x] Day 1 — Scaffold: `index.html`, `style.css`, README, SVG data-URI artwork
-- [ ] Day 2 — Fade-in `@keyframes`
+- [x] Day 2 — Fade-in `@keyframes`
 - [ ] Day 3 — Slide / `translate` animation
 - [ ] Day 4 — Rotate / `scale` animation
 - [ ] Day 5 — Hover-triggered animation
@@ -38,3 +38,9 @@ open index.html
   background. Because it is text, it diffs cleanly in git.
 - Animations are added one per day, each in its own clearly-labelled block in
   `style.css`, so the commits stay small and readable.
+- Each animation is opt-in via a modifier class (e.g. `.art--fade-in`) on the
+  `.art` element, so cards can mix and match effects without touching the base
+  styles.
+- `animation-fill-mode: both` is what keeps the fade from flashing: it applies
+  the `from` frame during the delay and holds the `to` frame afterwards.
+- Every animation is disabled under `@media (prefers-reduced-motion: reduce)`.
