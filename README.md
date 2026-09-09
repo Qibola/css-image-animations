@@ -27,7 +27,7 @@ open index.html
 
 - [x] Day 1 — Scaffold: `index.html`, `style.css`, README, SVG data-URI artwork
 - [x] Day 2 — Fade-in `@keyframes`
-- [ ] Day 3 — Slide / `translate` animation
+- [x] Day 3 — Slide / `translate` animation
 - [ ] Day 4 — Rotate / `scale` animation
 - [ ] Day 5 — Hover-triggered animation
 - [ ] Day 6 — Gallery layout + polish
@@ -44,3 +44,5 @@ open index.html
 - `animation-fill-mode: both` is what keeps the fade from flashing: it applies
   the `from` frame during the delay and holds the `to` frame afterwards.
 - Every animation is disabled under `@media (prefers-reduced-motion: reduce)`.
+- Slides use `transform: translateX()` rather than `margin` or `left`: transforms
+  don't trigger layout, so the browser can animate them on the compositor.

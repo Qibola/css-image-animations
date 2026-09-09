@@ -2,6 +2,7 @@
    css-image-animations
    Day 1: scaffold — page shell, gallery grid, card + SVG artwork.
    Day 2: fade-in animation.
+   Day 3: slide-in animation.
    Animations get added one per day below the "Animations" heading.
    --------------------------------------------------------------- */
 
@@ -123,10 +124,36 @@ body {
   animation: fade-in 1.4s ease-in 0.2s both;
 }
 
+
+/* Day 3 — Slide in.
+   `translateX` moves the image without touching layout, so nothing around the
+   card reflows while it animates — the browser can hand the whole thing to the
+   compositor. The image is clipped by the card's `overflow: hidden`, so it
+   looks like it slides in from off-panel. Pairing the move with a fade hides
+   the hard edge as it enters.
+   The `cubic-bezier` here overshoots slightly past 1, which gives the slide a
+   small settle at the end instead of stopping dead. */
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.art--slide-in {
+  animation: slide-in-left 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
 /* Anyone who has asked their OS to reduce motion gets the end state instantly
-   instead of the animation. */
+   instead of the animation. Every new modifier class gets added here too. */
 @media (prefers-reduced-motion: reduce) {
-  .art--fade-in {
+  .art--fade-in,
+  .art--slide-in {
     animation: none;
   }
 }
