@@ -28,7 +28,7 @@ open index.html
 - [x] Day 1 — Scaffold: `index.html`, `style.css`, README, SVG data-URI artwork
 - [x] Day 2 — Fade-in `@keyframes`
 - [x] Day 3 — Slide / `translate` animation
-- [ ] Day 4 — Rotate / `scale` animation
+- [x] Day 4 — Rotate / `scale` animation
 - [ ] Day 5 — Hover-triggered animation
 - [ ] Day 6 — Gallery layout + polish
 
@@ -46,3 +46,7 @@ open index.html
 - Every animation is disabled under `@media (prefers-reduced-motion: reduce)`.
 - Slides use `transform: translateX()` rather than `margin` or `left`: transforms
   don't trigger layout, so the browser can animate them on the compositor.
+- `scale()` and `rotate()` share a single `transform` declaration: CSS has one
+  `transform` property, so writing it twice replaces the first value rather
+  than combining them. Transform functions also apply right-to-left, so
+  `scale() rotate()` rotates first and scales the result.

@@ -3,6 +3,7 @@
    Day 1: scaffold — page shell, gallery grid, card + SVG artwork.
    Day 2: fade-in animation.
    Day 3: slide-in animation.
+   Day 4: zoom + rotate animation.
    Animations get added one per day below the "Animations" heading.
    --------------------------------------------------------------- */
 
@@ -149,11 +150,44 @@ body {
   animation: slide-in-left 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
+/* Day 4 — Rotate + scale.
+   One transform property, two functions: `scale()` for the zoom and
+   `rotate()` for the spin. They have to live in the same `transform`
+   declaration — a second `transform` line would simply overwrite the first,
+   which is the classic way this animation "stops working".
+   Order matters as well: transform functions apply right-to-left, so
+   `scale() rotate()` spins the image first and then scales the spun result.
+   The midpoint frame scales past the final 1 so the image swells and settles
+   back, which reads as a lens focusing rather than a flat grow.
+   `transform-origin: center` is the default but is stated here on purpose:
+   it is the pivot the rotation turns around. */
+
+@keyframes zoom-spin {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-12deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06) rotate(2deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.art--zoom-spin {
+  transform-origin: center;
+  animation: zoom-spin 1.2s ease-out 0.2s both;
+}
+
 /* Anyone who has asked their OS to reduce motion gets the end state instantly
    instead of the animation. Every new modifier class gets added here too. */
 @media (prefers-reduced-motion: reduce) {
   .art--fade-in,
-  .art--slide-in {
+  .art--slide-in,
+  .art--zoom-spin {
     animation: none;
   }
 }
