@@ -29,7 +29,7 @@ open index.html
 - [x] Day 2 — Fade-in `@keyframes`
 - [x] Day 3 — Slide / `translate` animation
 - [x] Day 4 — Rotate / `scale` animation
-- [ ] Day 5 — Hover-triggered animation
+- [x] Day 5 — Hover-triggered animation
 - [ ] Day 6 — Gallery layout + polish
 
 ## Notes
@@ -50,3 +50,11 @@ open index.html
   `transform` property, so writing it twice replaces the first value rather
   than combining them. Transform functions also apply right-to-left, so
   `scale() rotate()` rotates first and scales the result.
+- Hover animations are attached up front with `animation-play-state: paused`
+  rather than declared inside the `:hover` rule. Declaring them in `:hover`
+  restarts the animation from 0% on every hover and snaps it back on mouse-out;
+  pausing freezes it wherever it got to and resumes from there.
+- `animation-direction: alternate` is what removes the jump at the end of an
+  `infinite` loop — the animation plays back to the start instead of cutting to it.
+- Hover-only effects are invisible to keyboard users, so the pan card is also
+  triggered by `:focus-visible` and carries `tabindex="0"` to be focusable.

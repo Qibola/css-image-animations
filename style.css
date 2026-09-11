@@ -4,6 +4,7 @@
    Day 2: fade-in animation.
    Day 3: slide-in animation.
    Day 4: zoom + rotate animation.
+   Day 5: hover-triggered animation.
    Animations get added one per day below the "Animations" heading.
    --------------------------------------------------------------- */
 
@@ -182,12 +183,55 @@ body {
   animation: zoom-spin 1.2s ease-out 0.2s both;
 }
 
+/* Day 5 — Hover-triggered animation.
+   The first four cards animate once, on page load. This one only moves while
+   the pointer is over it — a slow Ken Burns pan-and-zoom.
+   The trick is that the animation is attached to the element all the time and
+   simply starts out paused; `:hover` does nothing but switch
+   `animation-play-state` to `running`. Declaring the animation inside the
+   `:hover` rule instead would work, but it restarts from 0% on every hover and
+   snaps back the instant the pointer leaves. Pausing keeps the position the
+   image had reached, so moving away freezes the pan and coming back resumes it.
+   `alternate` makes the pan run forwards then backwards instead of jumping
+   home at the end of each iteration, which is what stops the visible seam on
+   an `infinite` animation.
+   `:focus-visible` is here so the effect is reachable from the keyboard, not
+   just the mouse — that is why the card's `.art` carries `tabindex="0"`. */
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1) translate(0, 0);
+    filter: saturate(1);
+  }
+  to {
+    transform: scale(1.18) translate(-3%, -2%);
+    filter: saturate(1.2);
+  }
+}
+
+.art--hover-pan {
+  animation: ken-burns 6s ease-in-out infinite alternate;
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+.art--hover-pan:hover,
+.art--hover-pan:focus-visible {
+  animation-play-state: running;
+}
+
+.art--hover-pan:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+
 /* Anyone who has asked their OS to reduce motion gets the end state instantly
    instead of the animation. Every new modifier class gets added here too. */
 @media (prefers-reduced-motion: reduce) {
   .art--fade-in,
   .art--slide-in,
-  .art--zoom-spin {
+  .art--zoom-spin,
+  .art--hover-pan {
     animation: none;
   }
 }
